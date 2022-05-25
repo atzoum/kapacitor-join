@@ -19,7 +19,6 @@ doPost () {
 }
 
 
-
 doPost $INPUTNUM "in" &
 if [ "$OUTPUTNUM" -gt "0" ]; then
   doPost $OUTPUTNUM "out" &    

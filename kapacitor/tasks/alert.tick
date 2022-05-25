@@ -6,11 +6,11 @@ var inbound = batch
     FROM "metrics"."autogen".jobsdb_events
     WHERE "dir" = 'in'
   ''')
-    .period(30s)
-    .every(30s)
+    .period(5m)
+    .every(10s)
     .align()
-    .groupBy(time(30s))
-    .fill(previous)
+    .groupBy(time(5m))
+    .fill('previous')
   |last('value')
     .as('value')
 
@@ -20,10 +20,10 @@ var outbound = batch
     FROM "metrics"."autogen".jobsdb_events
     WHERE "dir" = 'out'
   ''')
-    .period(10m)
-    .every(30s)
+    .period(30m)
+    .every(10s)
     .align()
-    .groupBy(time(30s))
+    .groupBy(time(5m))
     .fill(0.0)
   |last('value')
     .as('value')
